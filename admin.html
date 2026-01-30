@@ -484,14 +484,13 @@
                     loadMatches();
                     alert('Match saved successfully!');
                 } else {
-                    // Netlify Live Environment: "Smart Save" via Clipboard
+                    // Netlify Live Environment
 
-                    // 1. Simulate the Save in memory
+                    // 1. Simulate the Save in memory for instant feedback
                     let updatedMatches = [...globalMatches];
                     const existingIdx = updatedMatches.findIndex(m => m.id === matchData.id);
-
                     const newMatch = { ...matchData };
-                    if (!newMatch.id) newMatch.id = Date.now().toString(); // Generate ID if new
+                    if (!newMatch.id) newMatch.id = Date.now().toString();
 
                     if (existingIdx !== -1) {
                         updatedMatches[existingIdx] = newMatch;
@@ -499,21 +498,43 @@
                         updatedMatches.push(newMatch);
                     }
 
-                    // 2. Convert to JSON
-                    const jsonStr = JSON.stringify(updatedMatches, null, 4);
+                    // 2. Try Direct Save via Netlify Function (GitHub API)
+                    try {
+                        const directSaveRes = await fetch('/.netlify/functions/save-data', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ matches: updatedMatches }) // Sending new list
+                        });
 
-                    // 3. Copy to Clipboard
-                    await navigator.clipboard.writeText(jsonStr);
+                        const directSaveData = await directSaveRes.json();
 
-                    // 4. Alert and Open GitHub
-                    const confirmAction = confirm(
-                        "⚠️ LIVE SITE MODE: Direct saving is not enabled.\n\n" +
-                        "✅ The updated data has been copied to your clipboard!\n\n" +
-                        "Click OK to open GitHub 'data.json' editor, then PASTE the data there."
-                    );
+                        if (directSaveRes.ok && directSaveData.success) {
+                            alert("✅ DIRECT SAVE SUCCESSFUL!\n\nNetlify is rebuilding the site. Changes will appear in ~1 minute.");
+                            resetForm();
+                            // Reload purely to reflect "local" changes in UI until rebuild is done
+                            globalMatches = updatedMatches;
+                            loadMatches();
+                            return; // Stop here, no need for clipboard fallback
+                        } else {
+                            throw new Error(directSaveData.error || "Unknown Error");
+                        }
 
-                    if (confirmAction) {
-                        window.open("https://github.com/bigwin959/cclanding/edit/main/data.json", "_blank");
+                    } catch (directError) {
+                        // 3. Fallback to Clipboard "Smart Save" if Direct Save fails (e.g. No Token)
+                        console.warn("Direct save failed, falling back to clipboard:", directError);
+
+                        const jsonStr = JSON.stringify(updatedMatches, null, 4);
+                        await navigator.clipboard.writeText(jsonStr);
+
+                        const confirmAction = confirm(
+                            "⚠️ Direct Auto-Save Failed (Token missing?).\n\n" +
+                            "But don't worry! I have copied the data to your clipboard.\n\n" +
+                            "Click OK to open GitHub, then PASTE the data manually."
+                        );
+
+                        if (confirmAction) {
+                            window.open("https://github.com/bigwin959/cclanding/edit/main/data.json", "_blank");
+                        }
                     }
                 }
             } catch (e) {
