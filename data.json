@@ -16,5 +16,42 @@
             "logo": "https://static.cricbuzz.com/a/img/v1/152x152/i1/c776287/i.jpg",
             "odds": ""
         }
+    },
+    {
+        "id": "1769784087560",
+        "series": "New Zealand tour of India, 2026",
+        "date": "Tomorrow",
+        "time": "01:30 PM / 01:30 PM (GMT) / 07:00 PM (LOCAL)",
+        "venue": "New Zealand tour of India, 2026",
+        "isLive": false,
+        "team1": {
+            "name": "India",
+            "logo": "https://static.cricbuzz.com/a/img/v1/152x152/i1/c776162/i.jpg",
+            "odds": "1.85"
+        },
+        "team2": {
+            "name": "New Zealand",
+            "logo": "https://static.cricbuzz.com/a/img/v1/152x152/i1/c776333/i.jpg",
+            "odds": "2"
+        }
+    }
+][
+    {
+        "id": "1769757369828",
+        "series": "South Africa v West Indies, 2026",
+        "date": "29/01/2026",
+        "time": "10:30 PM / 04:00 PM (GMT) / 06:00 PM (LOCAL)",
+        "venue": "",
+        "isLive": false,
+        "team1": {
+            "name": "West Indies",
+            "logo": "https://static.cricbuzz.com/a/img/v1/152x152/i1/c776191/i.jpg",
+            "odds": ""
+        },
+        "team2": {
+            "name": "South Africa",
+            "logo": "https://static.cricbuzz.com/a/img/v1/152x152/i1/c776287/i.jpg",
+            "odds": ""
+        }
     }
 ]
