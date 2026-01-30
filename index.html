@@ -394,7 +394,7 @@
     // Load Matches
     async function loadMatches() {
       try {
-        const res = await fetch("/api/matches");
+        const res = await fetch("data.json");
         const matches = await res.json();
         renderMatches(matches);
       } catch (e) {
@@ -481,7 +481,7 @@
     // Hero and Theme Data
     async function loadTheme() {
       try {
-        const res = await fetch("/api/hero");
+        const res = await fetch("hero_data.json");
         const data = await res.json();
 
         if (data.imageUrl) {
