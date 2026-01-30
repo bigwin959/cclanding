@@ -467,21 +467,58 @@
             };
 
             try {
-                const res = await fetch(API_URL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(matchData)
-                });
+                // Check valid environment
+                if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+                    // Local Environment: Use standard API
+                    const res = await fetch(API_URL, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(matchData)
+                    });
 
-                if (!res.ok) throw new Error("SAVE_FAILED");
-                const text = await res.text();
-                try { JSON.parse(text); } catch { throw new Error("NOT_JSON"); }
+                    if (!res.ok) throw new Error("SAVE_FAILED");
+                    const text = await res.text();
+                    try { JSON.parse(text); } catch { throw new Error("NOT_JSON"); }
 
-                resetForm();
-                loadMatches();
-                alert('Match saved successfully!');
+                    resetForm();
+                    loadMatches();
+                    alert('Match saved successfully!');
+                } else {
+                    // Netlify Live Environment: "Smart Save" via Clipboard
+
+                    // 1. Simulate the Save in memory
+                    let updatedMatches = [...globalMatches];
+                    const existingIdx = updatedMatches.findIndex(m => m.id === matchData.id);
+
+                    const newMatch = { ...matchData };
+                    if (!newMatch.id) newMatch.id = Date.now().toString(); // Generate ID if new
+
+                    if (existingIdx !== -1) {
+                        updatedMatches[existingIdx] = newMatch;
+                    } else {
+                        updatedMatches.push(newMatch);
+                    }
+
+                    // 2. Convert to JSON
+                    const jsonStr = JSON.stringify(updatedMatches, null, 4);
+
+                    // 3. Copy to Clipboard
+                    await navigator.clipboard.writeText(jsonStr);
+
+                    // 4. Alert and Open GitHub
+                    const confirmAction = confirm(
+                        "⚠️ LIVE SITE MODE: Direct saving is not enabled.\n\n" +
+                        "✅ The updated data has been copied to your clipboard!\n\n" +
+                        "Click OK to open GitHub 'data.json' editor, then PASTE the data there."
+                    );
+
+                    if (confirmAction) {
+                        window.open("https://github.com/bigwin959/cclanding/edit/main/data.json", "_blank");
+                    }
+                }
             } catch (e) {
-                alert('⚠️ Cannot SAVE on Live Site.\n\nPlease use the Local Admin Panel (localhost) to add/edit matches, then push the changes to GitHub.');
+                console.error(e);
+                alert('An error occurred while trying to save.');
             }
         });
 
