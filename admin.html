@@ -540,7 +540,15 @@
 
             const isDateSearch = type.includes('date=');
             const sourceName = source === 'sportradar' ? 'Sportradar' : (isDateSearch ? 'Cricbuzz Schedule' : `Cricbuzz (${type.toUpperCase()})`);
-            let endpoint = source === 'sportradar' ? '/api/fetch-sportradar' : `/api/fetch-online?type=${type}`;
+            let endpoint;
+
+            // Determine environment (Local vs Netlify)
+            if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+                endpoint = source === 'sportradar' ? '/api/fetch-sportradar' : `/api/fetch-online?type=${type}`;
+            } else {
+                // Use Netlify Functions on production
+                endpoint = source === 'sportradar' ? '/.netlify/functions/fetch-sportradar' : `/.netlify/functions/fetch-online?type=${type}`;
+            }
 
             status.textContent = `Fetching ${isDateSearch ? 'matches for selected date' : type} data from ${sourceName}... please wait...`;
             status.classList.remove('hidden');
@@ -548,14 +556,7 @@
 
             try {
                 const res = await fetch(endpoint);
-                const text = await res.text();
-                let data;
-
-                try {
-                    data = JSON.parse(text);
-                } catch (e) {
-                    throw new Error("SERVER_NOT_AVAILABLE");
-                }
+                let data = await res.json();
 
                 if (data.success && data.matches.length > 0) {
                     fetchedOnlineMatches = data.matches; // Store globally
