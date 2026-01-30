@@ -466,14 +466,23 @@
                 }
             };
 
-            await fetch(API_URL, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(matchData)
-            });
+            try {
+                const res = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(matchData)
+                });
 
-            resetForm();
-            loadMatches();
+                if (!res.ok) throw new Error("SAVE_FAILED");
+                const text = await res.text();
+                try { JSON.parse(text); } catch { throw new Error("NOT_JSON"); }
+
+                resetForm();
+                loadMatches();
+                alert('Match saved successfully!');
+            } catch (e) {
+                alert('⚠️ Cannot SAVE on Live Site.\n\nPlease use the Local Admin Panel (localhost) to add/edit matches, then push the changes to GitHub.');
+            }
         });
 
         // Delete
@@ -539,7 +548,14 @@
 
             try {
                 const res = await fetch(endpoint);
-                const data = await res.json();
+                const text = await res.text();
+                let data;
+
+                try {
+                    data = JSON.parse(text);
+                } catch (e) {
+                    throw new Error("SERVER_NOT_AVAILABLE");
+                }
 
                 if (data.success && data.matches.length > 0) {
                     fetchedOnlineMatches = data.matches; // Store globally
@@ -574,7 +590,13 @@
                 }
             } catch (err) {
                 console.error(err);
-                status.textContent = "Error fetching data. Ensure server is running.";
+                if (err.message === "SERVER_NOT_AVAILABLE" || err.name === "SyntaxError") {
+                    status.innerHTML = `<span class="text-red-500 font-bold">⚠️ Feature Unavailable on Live Site</span><br>
+                    <span class="text-xs">Fetching online data requires a backend server.<br>
+                    Please run the project <b>Locally</b> (npm start), fetch the data there, and then push the changes.</span>`;
+                } else {
+                    status.textContent = "Error fetching data. Ensure server is running.";
+                }
             }
         }
 
