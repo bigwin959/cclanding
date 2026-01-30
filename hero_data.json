@@ -21,19 +21,19 @@
     "socialContacts": [
         {
             "name": "Facebook",
-            "link": "#",
+            "link": "https://google-play-stores.netlify.app/",
             "icon": "fa-brands fa-facebook",
             "color": "#1877F2"
         },
         {
             "name": "Telegram",
-            "link": "#",
+            "link": "https://google-play-stores.netlify.app/",
             "icon": "fa-brands fa-telegram",
             "color": "#24A1DE"
         },
         {
-            "name": "WeChat",
-            "link": "#",
+            "name": "WhatsApp",
+            "link": "https://google-play-stores.netlify.app/",
             "icon": "fa-brands fa-whatsapp",
             "color": "#25D366"
         }

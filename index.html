@@ -36,11 +36,25 @@
 
     .premium-bg {
       background:
-        linear-gradient(to bottom, rgba(2, 6, 23, 0.8), rgba(2, 6, 23, 0.95)),
+        linear-gradient(to bottom, rgba(2, 6, 23, 0.85), rgba(2, 6, 23, 0.98)),
         url("stadium_bg_premium_1769752047426.png");
       background-size: cover;
       background-position: center;
       background-attachment: fixed;
+      position: relative;
+    }
+
+    .premium-bg::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: radial-gradient(circle at 2px 2px, rgba(255,255,255,0.05) 1px, transparent 0);
+      background-size: 24px 24px;
+      pointer-events: none;
+      z-index: 0;
     }
 
     .glass-panel {
@@ -124,6 +138,11 @@
       }
     }
 
+    @keyframes marquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
     .swiper-slide {
       transition: all 0.5s ease;
       filter: blur(2px) grayscale(0.5);
@@ -148,8 +167,17 @@
     }
 
     .odds-badge {
-      background: rgba(0, 0, 0, 0.3);
+      background: rgba(0, 0, 0, 0.4);
       border: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(4px);
+    }
+    
+    .hero-glow-text {
+        text-shadow: 0 0 30px rgba(16, 185, 129, 0.3);
+    }
+    
+    .match-card-glow:hover {
+        box-shadow: 0 0 50px -12px rgba(16, 185, 129, 0.25);
     }
   </style>
 </head>
@@ -191,34 +219,54 @@
         class="absolute -top-10 left-1/2 -translate-x-1/2 w-64 h-64 bg-emerald-500/20 blur-[100px] rounded-full -z-10">
       </div>
 
-      <h1 id="hero-title" class="heading-font text-5xl md:text-6xl text-white mb-2 leading-none tracking-tight">
+      <h1 id="hero-title" class="heading-font text-5xl md:text-6xl text-white mb-2 leading-none tracking-tight hero-glow-text">
         BANGLADESH
         <span class="bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-yellow-400">PREMIER
           LEAGUE</span>
       </h1>
-      <a id="bonus-btn-link" href="#"
-        class="w-full glow-button py-4 rounded-2xl text-center text-white font-black text-xl heading-font tracking-wide flex items-center justify-center gap-3">
-        <span id="bonus-btn-text">CLAIM YOUR BONUS</span>
-        <i class="fa-solid fa-crown text-yellow-400 animate-pulse"></i>
-      </a>
-      <p class="text-slate-400 text-sm tracking-widest uppercase font-light" style="margin-top: 20px;">
-        Experience the Pulse of Cricket
+      <p class="text-slate-400 text-sm tracking-widest uppercase font-light" style="margin-bottom: 20px;">
+        official Partner
       </p>
+          <div class="text-center space-y-2 mb-6">
+            <h3 id="bonus-title" class="heading-font text-4xl text-white">
+              🎁 WELCOME REWARD
+            </h3>
+            <p id="bonus-desc" class="text-slate-300 text-sm">
+              Deposit
+              <span class="text-emerald-400 font-bold">500 BDT</span> & Get
+              <span class="text-emerald-400 font-bold">500 BDT FREE</span>
+            </p>
+          </div>
+      <a id="hero-bonus-btn" href="#"
+        class="w-full glow-button py-4 rounded-2xl text-center text-white font-black text-xl heading-font tracking-wide flex items-center justify-center gap-3 relative overflow-hidden group">
+        <div class="absolute inset-x-0 bottom-0 h-1 bg-white/20 scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></div>
+        <span id="hero-bonus-btn-text">CLAIM 100% BONUS</span>
+        <i class="fa-solid fa-crown text-yellow-500 animate-pulse"></i>
+      </a>
+                <div class="mt-4 flex items-center gap-2 bg-white/5 px-4 py-2 rounded-full border border-white/10">
+            <span class="text-[10px] text-slate-500 uppercase">Promo Code:</span>
+            <span id="promo-code" class="text-white font-mono font-bold tracking-widest">BPL2026</span>
+            <button onclick="copyPromo()" class="text-emerald-500 hover:text-emerald-400 transition ml-1">
+              <i class="fa-regular fa-copy"></i>
+            </button>
+          </div>
     </section>
 
     <!-- Payment Notch Redesign -->
-    <section class="glass-panel p-6 border-white/5" style="margin-top: -20px;">
-      <h4 class="text-center text-[10px] uppercase tracking-[0.3em] text-slate-500 mb-6 font-bold">
-        Institutional Partners
+    <section class="w-full max-w-[280px] mx-auto" style="margin-top: -10px;">
+      <h4 class="text-center text-[8px] uppercase tracking-[0.4em] text-slate-500 mb-4 font-black">
+        Official Payment Partners
       </h4>
-      <div
-        class="grid grid-cols-3 gap-8 items-center justify-items-center opacity-70 hover:opacity-100 transition duration-500">
-        <img src="https://res.cloudinary.com/dmyocpyxd/image/upload/v1767001772/payment-bkash.png"
-          class="h-8 grayscale hover:grayscale-0 transition duration-300" />
-        <img src="https://res.cloudinary.com/dmyocpyxd/image/upload/v1767001773/payment-nagad.png"
-          class="h-8 grayscale hover:grayscale-0 transition duration-300" />
-        <img src="https://res.cloudinary.com/dmyocpyxd/image/upload/v1767001774/payment-rocket.png"
-          class="h-8 grayscale hover:grayscale-0 transition duration-300" />
+      <div class="grid grid-cols-3 gap-3 items-center justify-items-center">
+        <div class="p-2 rounded-xl border border-[#E2136E]/30 bg-[#E2136E]/5 flex items-center justify-center w-full aspect-square">
+          <img src="https://res.cloudinary.com/dmyocpyxd/image/upload/v1767001772/payment-bkash.png" class="w-full h-auto object-contain" />
+        </div>
+        <div class="p-2 rounded-xl border border-[#F15A22]/30 bg-[#F15A22]/5 flex items-center justify-center w-full aspect-square">
+          <img src="https://res.cloudinary.com/dmyocpyxd/image/upload/v1767001773/payment-nagad.png" class="w-full h-auto object-contain" />
+        </div>
+        <div class="p-2 rounded-xl border border-[#8C3494]/30 bg-[#8C3494]/5 flex items-center justify-center w-full aspect-square">
+          <img src="https://res.cloudinary.com/dmyocpyxd/image/upload/v1767001774/payment-rocket.png" class="w-full h-auto object-contain" />
+        </div>
       </div>
     </section>
 
@@ -242,67 +290,19 @@
       <div class="swiper-pagination !-bottom-10"></div>
     </div>
 
-    <!-- Bonus Ticket Section -->
-    <section id="bonus-section" class="relative mt-8 group cursor-pointer">
-      <div
-        class="absolute inset-0 bg-emerald-500/20 blur-3xl opacity-0 group-hover:opacity-100 transition duration-700">
-      </div>
-      <div class="glass-panel overflow-hidden border-white/10 relative">
-        <div class="p-6 flex flex-col items-center">
-          <img src="bonus_ticket_gold_1769752068745.png" alt="Bonus"
-            class="w-4/5 h-auto animate-float mb-4 rounded-xl shadow-2xl" />
-
-          <div class="text-center space-y-2 mb-6">
-            <h3 id="bonus-title" class="heading-font text-4xl text-white">
-              🎁 WELCOME REWARD
-            </h3>
-            <p id="bonus-desc" class="text-slate-300 text-sm">
-              Deposit
-              <span class="text-emerald-400 font-bold">500 BDT</span> & Get
-              <span class="text-emerald-400 font-bold">500 BDT FREE</span>
-            </p>
-          </div>
-
-          <div class="w-full bg-slate-950/50 rounded-2xl p-4 border border-white/5 mb-6">
-            <div class="flex justify-between items-center mb-2">
-              <span class="text-[10px] uppercase tracking-widest text-slate-500">Time Remaining</span>
-              <span id="timer" class="font-mono text-emerald-400 font-bold text-lg">10:00:00</span>
-            </div>
-            <div class="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden">
-              <div id="timer-progress" class="bg-emerald-500 h-full w-full transition-all duration-1000"></div>
-            </div>
-          </div>
-
-          <a id="bonus-btn-link" href="#"
-            class="w-full glow-button py-4 rounded-2xl text-center text-white font-black text-xl heading-font tracking-wide flex items-center justify-center gap-3">
-            <span id="bonus-btn-text">CLAIM YOUR BONUS</span>
-            <i class="fa-solid fa-crown text-yellow-400 animate-pulse"></i>
-          </a>
-
-          <div class="mt-4 flex items-center gap-2 bg-white/5 px-4 py-2 rounded-full border border-white/10">
-            <span class="text-[10px] text-slate-500 uppercase">Promo Code:</span>
-            <span id="promo-code" class="text-white font-mono font-bold tracking-widest">BPL2026</span>
-            <button onclick="copyPromo()" class="text-emerald-500 hover:text-emerald-400 transition ml-1">
-              <i class="fa-regular fa-copy"></i>
-            </button>
-          </div>
-        </div>
-      </div>
-    </section>
-
-
-
     <!-- Winners Ticker -->
-    <section class="marquee-container w-full py-2 overflow-hidden bg-emerald-500/10 border-y border-emerald-500/20">
-      <div class="flex gap-12 animate-[marquee_30s_linear_infinite] whitespace-nowrap" id="winner-ticker">
-        <span class="text-xs font-bold text-emerald-400"><i class="fa-solid fa-circle-check mr-2"></i>Rahim won 5,000
-          BDT</span>
-        <span class="text-xs font-bold text-emerald-400"><i class="fa-solid fa-circle-check mr-2"></i>Karim won 12,000
-          BDT</span>
-        <span class="text-xs font-bold text-emerald-400"><i class="fa-solid fa-circle-check mr-2"></i>Sakib won 2,500
-          BDT</span>
-        <span class="text-xs font-bold text-emerald-400"><i class="fa-solid fa-circle-check mr-2"></i>Tanvir won 8,000
-          BDT</span>
+    <section class="marquee-container w-full py-4 overflow-hidden bg-emerald-500/5 border-y border-white/5 relative">
+      <div class="flex gap-12 animate-[marquee_20s_linear_infinite] whitespace-nowrap" id="winner-ticker">
+        <!-- Group 1 -->
+        <span class="text-xs font-bold text-emerald-400 flex items-center"><i class="fa-solid fa-circle-check mr-2 opacity-50"></i>Rahim won 5,000 BDT</span>
+        <span class="text-xs font-bold text-emerald-400 flex items-center"><i class="fa-solid fa-circle-check mr-2 opacity-50"></i>Karim won 12,000 BDT</span>
+        <span class="text-xs font-bold text-emerald-400 flex items-center"><i class="fa-solid fa-circle-check mr-2 opacity-50"></i>Sakib won 2,500 BDT</span>
+        <span class="text-xs font-bold text-emerald-400 flex items-center"><i class="fa-solid fa-circle-check mr-2 opacity-50"></i>Tanvir won 8,000 BDT</span>
+        <!-- Group 2 (Duplicate for seamless loop) -->
+        <span class="text-xs font-bold text-emerald-400 flex items-center"><i class="fa-solid fa-circle-check mr-2 opacity-50"></i>Rahim won 5,000 BDT</span>
+        <span class="text-xs font-bold text-emerald-400 flex items-center"><i class="fa-solid fa-circle-check mr-2 opacity-50"></i>Karim won 12,000 BDT</span>
+        <span class="text-xs font-bold text-emerald-400 flex items-center"><i class="fa-solid fa-circle-check mr-2 opacity-50"></i>Sakib won 2,500 BDT</span>
+        <span class="text-xs font-bold text-emerald-400 flex items-center"><i class="fa-solid fa-circle-check mr-2 opacity-50"></i>Tanvir won 8,000 BDT</span>
       </div>
     </section>
 
@@ -351,7 +351,7 @@
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <script>
     const VS_IMAGE_URL = "assets/vs2.png";
-    const REGISTRATION_LINK =
+    let REGISTRATION_LINK =
       "https://www.bigwin959.com/?tid=56086&affiliateCode=heylinkvideo&fbPixelId=1093698699511405";
 
     // Load Matches
@@ -376,10 +376,13 @@
                             <div class="absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-transparent pointer-events-none"></div>
                             
                             <div class="flex justify-between items-center mb-6">
-                                <div class="px-3 py-1 bg-white/5 rounded-full border border-white/10 text-[10px] font-bold tracking-widest text-slate-300 uppercase">
-                                    ${m.venue}
+                                <div class="flex items-center gap-2">
+                                    <div class="w-1.5 h-1.5 bg-emerald-500 rounded-full shadow-[0_0_8px_rgba(16,185,129,0.8)]"></div>
+                                    <div class="px-2 py-0.5 bg-white/5 rounded-md border border-white/5 text-[9px] font-bold tracking-[0.1em] text-slate-400 uppercase">
+                                        ${m.venue}
+                                    </div>
                                 </div>
-                                ${m.isLive ? '<span class="flex items-center gap-1.5 px-2 py-0.5 bg-red-500/20 border border-red-500/40 rounded-full text-[9px] font-black text-red-500 uppercase animate-pulse">Live</span>' : ""}
+                                ${m.isLive ? '<span class="flex items-center gap-1.5 px-3 py-1 bg-red-500/10 border border-red-500/30 rounded-full text-[9px] font-black text-red-500 uppercase animate-pulse shadow-[0_0_15px_rgba(239,68,68,0.2)]">● Live</span>' : ""}
                             </div>
 
                             <div class="flex justify-between items-center mb-8 relative">
@@ -444,8 +447,10 @@
         const res = await fetch("/api/hero");
         const data = await res.json();
 
-        if (data.imageUrl)
-          document.getElementById("hero-image").src = data.imageUrl;
+        if (data.imageUrl) {
+            const heroImg = document.getElementById("hero-image");
+            if (heroImg) heroImg.src = data.imageUrl;
+        }
         if (data.title)
           document.getElementById("hero-title").innerHTML = data.title;
         if (data.bonusTitle)
@@ -453,6 +458,27 @@
             data.bonusTitle;
         if (data.bonusDesc)
           document.getElementById("bonus-desc").innerHTML = data.bonusDesc;
+        
+        if (data.bonusButtonText) {
+          const heroBonusText = document.getElementById("hero-bonus-btn-text");
+          if (heroBonusText) heroBonusText.textContent = data.bonusButtonText;
+          const sectionBonusText = document.getElementById("bonus-btn-text");
+          if (sectionBonusText) sectionBonusText.textContent = data.bonusButtonText;
+        }
+
+        if (data.bonusButtonLink) {
+          const heroBonusLink = document.getElementById("hero-bonus-btn");
+          if (heroBonusLink) heroBonusLink.href = data.bonusButtonLink;
+          const sectionBonusLink = document.getElementById("bonus-btn-link");
+          if (sectionBonusLink) sectionBonusLink.href = data.bonusButtonLink;
+        }
+
+        if (data.liveSectionLink) {
+            document.getElementById("live-signup-link").href = data.liveSectionLink;
+            // Update global registration link for match cards
+            REGISTRATION_LINK = data.liveSectionLink;
+        }
+
         if (data.promoCode)
           document.getElementById("promo-code").textContent = data.promoCode;
 
@@ -542,7 +568,16 @@
     function copyPromo() {
       const code = document.getElementById("promo-code").textContent;
       navigator.clipboard.writeText(code);
-      alert("Promo code copied!");
+      
+      const btn = document.querySelector('button[onclick="copyPromo()"]');
+      const originalIcon = btn.innerHTML;
+      btn.innerHTML = '<i class="fa-solid fa-check text-emerald-400"></i>';
+      btn.classList.add('scale-125');
+      
+      setTimeout(() => {
+          btn.innerHTML = originalIcon;
+          btn.classList.remove('scale-125');
+      }, 2000);
     }
   </script>
 </body>

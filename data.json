@@ -1,91 +1,19 @@
 [
     {
-        "id": "1769495104510",
-        "series": "Ireland vs Italy in UAE, 2026",
-        "date": "26/01/2026",
-        "time": "10:00 PM / 02:00 PM (GMT) / 06:00 PM (LOCAL)",
+        "id": "1769757369828",
+        "series": "South Africa v West Indies, 2026",
+        "date": "29/01/2026",
+        "time": "10:30 PM / 04:00 PM (GMT) / 06:00 PM (LOCAL)",
         "venue": "",
         "isLive": false,
         "team1": {
-            "name": "Ireland",
-            "logo": "https://static.cricbuzz.com/a/img/v1/152x152/i1/c776285/i.jpg",
+            "name": "West Indies",
+            "logo": "https://static.cricbuzz.com/a/img/v1/152x152/i1/c776191/i.jpg",
             "odds": ""
         },
         "team2": {
-            "name": "Italy",
-            "logo": "https://static.cricbuzz.com/a/img/v1/152x152/i1/c776295/i.jpg",
-            "odds": ""
-        }
-    },
-    {
-        "id": "1769495112490",
-        "series": "ICC Under 19 World Cup 2026",
-        "date": "26/01/2026",
-        "time": "03:30 PM / 07:30 AM (GMT) / 09:30 AM (LOCAL)",
-        "venue": "",
-        "isLive": false,
-        "team1": {
-            "name": "Bangladesh U19",
-            "logo": "https://static.cricbuzz.com/a/img/v1/152x152/i1/c776211/i.jpg",
-            "odds": ""
-        },
-        "team2": {
-            "name": "England U19",
-            "logo": "https://static.cricbuzz.com/a/img/v1/152x152/i1/c776245/i.jpg",
-            "odds": ""
-        }
-    },
-    {
-        "id": "1769495123855",
-        "series": "ICC Under 19 World Cup 2026",
-        "date": "Today",
-        "time": "03:30 PM / 07:30 AM (GMT) / 09:30 AM (LOCAL)",
-        "venue": "",
-        "isLive": false,
-        "team1": {
-            "name": "Pakistan U19",
-            "logo": "https://static.cricbuzz.com/a/img/v1/152x152/i1/c776309/i.jpg",
-            "odds": ""
-        },
-        "team2": {
-            "name": "New Zealand U19",
-            "logo": "https://static.cricbuzz.com/a/img/v1/152x152/i1/c776334/i.jpg",
-            "odds": ""
-        }
-    },
-    {
-        "id": "1769497827183",
-        "series": "ICC Under 19 World Cup 2026",
-        "date": "Today",
-        "time": "03:30 PM / 07:30 AM (GMT) / 09:30 AM (LOCAL)",
-        "venue": "",
-        "isLive": false,
-        "team1": {
-            "name": "Zimbabwe U19",
-            "logo": "https://static.cricbuzz.com/a/img/v1/152x152/i1/c776199/i.jpg",
-            "odds": ""
-        },
-        "team2": {
-            "name": "India U19",
-            "logo": "https://static.cricbuzz.com/a/img/v1/152x152/i1/c776180/i.jpg",
-            "odds": ""
-        }
-    },
-    {
-        "id": "1769663950905",
-        "series": "New Zealand tour of India, 2026",
-        "date": "28/01/2026",
-        "time": "08:00 PM / 01:30 PM (GMT) / 07:00 PM (LOCAL)",
-        "venue": "",
-        "isLive": false,
-        "team1": {
-            "name": "New Zealand",
-            "logo": "https://static.cricbuzz.com/a/img/v1/152x152/i1/c776333/i.jpg",
-            "odds": ""
-        },
-        "team2": {
-            "name": "India",
-            "logo": "https://static.cricbuzz.com/a/img/v1/152x152/i1/c776162/i.jpg",
+            "name": "South Africa",
+            "logo": "https://static.cricbuzz.com/a/img/v1/152x152/i1/c776287/i.jpg",
             "odds": ""
         }
     }
