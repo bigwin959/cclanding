@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bangladesh Premier League - Live Odds</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Roboto:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <script src="https://plugin-code.salesmartly.com/js/project_474038_488402_1759130261.js" defer></script>
+
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #0f172a;
+            color: white;
+        }
+
+        h1,
+        h2,
+        .odds-font {
+            font-family: 'Oswald', sans-serif;
+        }
+
+        .cricket-bg {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1531415074968-055a4445580f?q=80&w=1000&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .animate-pulse-slow {
+            animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        .gradient-btn {
+            background: linear-gradient(90deg, #F59E0B 0%, #D97706 100%);
+            box-shadow: 0 0 20px rgba(245, 158, 11, 0.6);
+        }
+
+        .bkash-pink {
+            color: #E2136E;
+        }
+
+        @keyframes heartbeat {
+            0% {
+                transform: scale(1);
+            }
+
+            14% {
+                transform: scale(1.05);
+            }
+
+            28% {
+                transform: scale(1);
+            }
+
+            42% {
+                transform: scale(1.05);
+            }
+
+            70% {
+                transform: scale(1);
+            }
+        }
+
+        .animate-heartbeat {
+            animation: heartbeat 3s infinite;
+        }
+
+        @keyframes marquee {
+            0% {
+                transform: translateX(100%);
+            }
+
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+
+        /* Swiper Customization */
+        .swiper {
+            width: 100%;
+            padding-top: 10px;
+            padding-bottom: 30px;
+        }
+
+        .swiper-slide {
+            opacity: 0.4;
+            transition: opacity 0.3s;
+            transform: scale(0.9);
+        }
+
+        .swiper-slide-active {
+            opacity: 1;
+            transform: scale(1);
+            z-index: 10;
+        }
+
+        @keyframes shimmer {
+            0% {
+                transform: translateX(-150%) skewX(-15deg);
+            }
+
+            100% {
+                transform: translateX(150%) skewX(-15deg);
+            }
+        }
+
+        .animate-shimmer {
+            animation: shimmer 1.5s infinite linear;
+        }
+    </style>
+</head>
+
+<body class="bg-slate-900 min-h-screen flex flex-col items-center">
+
+    <nav id="main-nav"
+        class="w-full bg-slate-800 p-3 flex justify-between items-center shadow-lg border-b border-slate-700 fixed top-0 z-50">
+        <div class="flex items-center gap-2">
+            <i id="nav-icon" class="fa-solid fa-trophy text-yellow-500 text-xl"></i>
+            <span id="nav-title" class="font-bold text-lg tracking-wider">BPL<span
+                    class="text-green-500">2026</span></span>
+        </div>
+        <div class="flex items-center gap-2">
+            <span class="w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
+            <span class="text-xs font-bold text-red-500">LIVE</span>
+            <a href="https://www.bigwin959.com/register?affiliateCode=cricket001" id="live-signup-link"
+                class="bg-green-600 px-3 py-1 rounded text-xs font-bold uppercase hover:bg-green-500 transition">Sign
+                Up/Login</a>
+        </div>
+    </nav>
+
+    <main class="w-full max-w-md mt-14 pb-10 px-0 flex flex-col gap-2 overflow-hidden">
+
+        <!-- Payment Notch Section -->
+        <div class="w-[200px] h-20 mx-auto bg-slate-900/40 backdrop-blur-md rounded-b-2xl border-x border-b border-slate-700/50 grid grid-cols-3 items-center justify-items-center mb-2 px-1"
+            style="margin-bottom: 0; height: 50px;">
+            <div class="flex flex-col items-center justify-center">
+                <img src="https://res.cloudinary.com/dmyocpyxd/image/upload/v1767001772/payment-bkash.png" alt="bKash"
+                    class="h-5 w-auto object-contain hover:scale-110 transition">
+                <p class="text-[8px] text-slate-400 uppercase tracking-tighter mt-0.5">bKash</p>
+            </div>
+            <div class="flex flex-col items-center justify-center border-l border-r border-slate-700/50 w-full">
+                <img src="https://res.cloudinary.com/dmyocpyxd/image/upload/v1767001773/payment-nagad.png" alt="Nagad"
+                    class="h-5 w-auto object-contain hover:scale-110 transition">
+                <p class="text-[8px] text-slate-400 uppercase tracking-tighter mt-0.5">Nagad</p>
+            </div>
+            <div class="flex flex-col items-center justify-center">
+                <img src="https://res.cloudinary.com/dmyocpyxd/image/upload/v1767001774/payment-rocket.png" alt="Rocket"
+                    class="h-5 w-auto object-contain hover:scale-110 transition">
+                <p class="text-[8px] text-slate-400 uppercase tracking-tighter mt-0.5">Rocket</p>
+            </div>
+        </div>
+
+        <div class="text-center pt-2 px-4">
+            <img id="hero-image" src="https://res.cloudinary.com/dmyocpyxd/image/upload/v1768741799/1.jpg" alt="BPL T20"
+                class="w-full h-32 object-cover object-top rounded-lg shadow-lg mb-1 border border-slate-700/50">
+            <p class="text-[10px] text-slate-400 uppercase tracking-widest mb-0.5">Official Betting Partner</p>
+            <h1 id="hero-title" class="text-xl font-bold text-white leading-none">BANGLADESH PREMIER LEAGUE</h1>
+        </div>
+
+        <!-- Swiper Container -->
+        <div class="swiper mySwiper !pt-2 !pb-6 mb-6" style="margin-bottom: 0;">
+            <div class="swiper-wrapper" id="matches-container">
+                <!-- Slides will be injected here -->
+            </div>
+            <div class="swiper-pagination !-bottom-0"></div>
+        </div>
+
+        <div id="bonus-section"
+            class="bg-gradient-to-r from-green-900 to-slate-900 p-4 mx-4 rounded-xl border border-green-700/50 shadow-lg text-center relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-20 h-20 bg-green-500 blur-3xl opacity-20"></div>
+            <p id="bonus-desc" class="text-slate-300 text-sm mb-3">Deposit <span class="text-yellow-400 font-bold">500
+                    BDT</span> & Get
+                <span class="text-yellow-400 font-bold">500 BDT FREE</span>
+            </p>
+            <a id="bonus-btn-link"
+                href="https://www.bigwin959.com/?tid=56086&affiliateCode=heylinkvideo&fbPixelId=1093698699511405"
+                class="block w-full gradient-btn text-black font-bold text-lg py-3 rounded-lg uppercase tracking-wider transition transform duration-200 animate-heartbeat relative overflow-hidden group">
+                <span class="relative z-10"><span id="bonus-btn-text">CLAIM 100% BONUS NOW</span> <i
+                        class="fa-solid fa-arrow-right ml-2 group-hover:translate-x-1 transition"></i></span>
+                <div class="absolute inset-0 w-full h-full animate-shimmer"
+                    style="background: linear-gradient(90deg, transparent 45%, rgba(255,255,255,0.95) 50%, transparent 55%);">
+                </div>
+            </a>
+            <h2 id="bonus-title" class="text-xl font-bold text-white mb-1"
+                style="padding-top: 5px; padding-bottom: 5px;">🎁 WELCOME BONUS
+            </h2>
+            <div class="flex justify-center gap-2 text-sm font-mono text-red-400 mb-4 bg-black/30 py-1 rounded"
+                style="padding-top: 5px; padding-bottom: 5px; margin: 0 0 5px 0;">
+                Offer Expires in: <span id="timer">10:00:00</span>
+            </div>
+
+
+
+
+
+
+            <p class="text-xs text-slate-400 mt-2"><span class="text-red-400 font-mono">Extra Bonus
+                </span>Use Promo Code:
+                <span id="promo-code" class="text-white font-mono">BPL2026</span>
+            </p>
+        </div>
+
+
+        <a href="https://t.me/bigwin959"
+            class="flex items-center justify-center gap-2 bg-blue-500/20 border border-blue-500/50 p-2 mx-4 rounded text-blue-400 text-sm hover:bg-blue-500/30 transition mt-2">
+            <i class="fa-brands fa-telegram text-xl"></i>
+            <span>Join Official Channel for <b>Daily Free Tips</b></span>
+        </a>
+
+        <div class="bg-slate-800/50 rounded p-2 mx-4 overflow-hidden border border-slate-700/50">
+            <div class="text-xs text-slate-400 mb-1 flex items-center gap-1"><i
+                    class="fa-solid fa-bell text-yellow-500"></i> Recent Winners:</div>
+            <div class="text-xs text-green-400 whitespace-nowrap overflow-hidden relative h-5">
+                <div class="absolute flex gap-8 animate-[marquee_20s_linear_infinite]" id="winner-ticker">
+                    <span>Rahim won 5,000 BDT</span>
+                    <span>•</span>
+                    <span>Karim won 12,000 BDT</span>
+                    <span>•</span>
+                    <span>Sakib won 2,500 BDT</span>
+                    <span>•</span>
+                    <span>Tanvir won 8,000 BDT</span>
+                    <span>•</span>
+                    <span>Rahim won 5,000 BDT</span>
+                    <span>•</span>
+                    <span>Karim won 12,000 BDT</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Social Contacts Section -->
+        <div id="social-section" class="grid grid-cols-3 gap-4 p-4 mx-4 mt-2 border-t border-slate-800">
+            <!-- Dynamic Social Links -->
+        </div>
+
+    </main>
+
+    <footer class="w-full bg-slate-950 py-6 text-center text-slate-600 text-xs mt-auto">
+        <p class="mb-2">© 2026 Official BPL Partner. All rights reserved.</p>
+        <div class="flex justify-center gap-3">
+            <span>Privacy Policy</span>
+            <span>Terms of Service</span>
+            <span>Responsible Gaming 18+</span>
+        </div>
+    </footer>
+
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <script>
+        // Use a generic "VS" PNG image
+        const VS_IMAGE_URL = 'assets/vs2.png';
+        const REGISTRATION_LINK = 'https://www.bigwin959.com/?tid=56086&affiliateCode=heylinkvideo&fbPixelId=1093698699511405';
+
+        // Data Fetching Logic
+        async function loadHeroData() {
+            try {
+                const res = await fetch('/api/hero');
+                const data = await res.json();
+                if (data.imageUrl) document.getElementById('hero-image').src = data.imageUrl;
+                if (data.title) document.getElementById('hero-title').textContent = data.title;
+                if (data.promoCode) document.getElementById('promo-code').textContent = data.promoCode;
+                if (data.bonusTitle) document.getElementById('bonus-title').textContent = data.bonusTitle;
+                if (data.bonusDesc) document.getElementById('bonus-desc').innerHTML = data.bonusDesc;
+                if (data.bonusButtonText) document.getElementById('bonus-btn-text').textContent = data.bonusButtonText;
+                if (data.bonusButtonLink) document.getElementById('bonus-btn-link').href = data.bonusButtonLink;
+                if (data.navIconClass) document.getElementById('nav-icon').className = data.navIconClass;
+                if (data.navTitleHTML) document.getElementById('nav-title').innerHTML = data.navTitleHTML;
+                if (data.liveSectionLink) document.getElementById('live-signup-link').href = data.liveSectionLink;
+                if (data.navBackgroundColor) document.getElementById('main-nav').style.backgroundColor = data.navBackgroundColor;
+                if (data.bodyBackgroundColor) document.body.style.backgroundColor = data.bodyBackgroundColor;
+                if (data.bonusGradientStart && data.bonusGradientEnd) {
+                    document.getElementById('bonus-section').style.background = `linear-gradient(to right, ${data.bonusGradientStart}, ${data.bonusGradientEnd})`;
+                }
+
+                // Color customizations
+                if (data.bonusTitleColor) document.getElementById('bonus-title').style.color = data.bonusTitleColor;
+                if (data.bonusDescColor) document.getElementById('bonus-desc').style.color = data.bonusDescColor;
+                if (data.bonusAccentColor) {
+                    const accents = document.querySelector('#bonus-desc').querySelectorAll('span');
+                    accents.forEach(span => span.style.color = data.bonusAccentColor);
+                }
+                if (data.bonusButtonTextColor) document.getElementById('bonus-btn-text').parentElement.parentElement.style.color = data.bonusButtonTextColor;
+                if (data.bonusButtonGradientStart && data.bonusButtonGradientEnd) {
+                    document.getElementById('bonus-btn-link').style.background = `linear-gradient(90deg, ${data.bonusButtonGradientStart} 0%, ${data.bonusButtonGradientEnd} 100%)`;
+                }
+
+                // Render Social Contacts
+                if (data.socialContacts) {
+                    const socialSec = document.getElementById('social-section');
+                    socialSec.innerHTML = '';
+                    data.socialContacts.forEach(sc => {
+                        if (sc.name && sc.link) {
+                            socialSec.innerHTML += `
+                                <a href="${sc.link}" target="_blank" class="flex flex-col items-center justify-center group transition-transform duration-200 hover:scale-110">
+                                    <div class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center mb-1">
+                                        <i class="${sc.icon || 'fa-solid fa-link'} text-xl" style="color: ${sc.color || '#ffffff'}"></i>
+                                    </div>
+                                    <span class="text-[10px] text-slate-400 uppercase tracking-widest">${sc.name}</span>
+                                </a>
+                            `;
+                        }
+                    });
+                }
+            } catch (e) {
+                console.error("Failed to load hero data", e);
+            }
+        }
+
+        async function loadMatchesData() {
+            try {
+                // Fetch list from backend API
+                const response = await fetch('/api/matches');
+                if (!response.ok) throw new Error('Network response was not ok');
+                const matches = await response.json();
+
+                if (Array.isArray(matches)) {
+                    renderSlides(matches);
+                }
+            } catch (error) {
+                console.log("Viewing static file or API failed.", error);
+            }
+        }
+
+        function renderSlides(matches) {
+            const container = document.getElementById('matches-container');
+            container.innerHTML = ''; // Clear existing
+
+            matches.forEach(match => {
+                const liveBadgeHTML = match.isLive ?
+                    `<div class="absolute top-2 right-2 z-20"><span class="text-[10px] bg-red-600 text-white px-2 py-0.5 rounded animate-pulse shadow-red-500/50 shadow-lg">LIVE</span></div>` : '';
+
+                const slide = document.createElement('div');
+                slide.className = 'swiper-slide';
+
+                slide.innerHTML = `
+                <div class="bg-slate-900 border border-slate-700/50 rounded-lg overflow-hidden shadow-[0_0_20px_rgba(0,0,0,0.5)] relative h-full transform transition-all group-hover:scale-[1.01]">
+                    <!-- Header Strip -->
+                    <div class="bg-[#0f172a] border-b border-slate-700 p-3 flex justify-between items-center relative overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-r from-green-900/20 to-transparent"></div>
+                        <div class="flex items-center gap-2 relative z-10">
+                            <i class="fa-regular fa-calendar text-green-500 text-xs"></i>
+                            <span class="text-xs font-bold text-slate-200 tracking-wider uppercase">${match.date}</span>
+                            <span class="text-[10px] text-slate-400">|</span>
+                            <span class="text-xs text-slate-300 font-mono">${match.time}</span>
+                        </div>
+                        <span class="bg-slate-800 border border-slate-600 px-2 py-0.5 rounded text-[10px] text-slate-300 uppercase tracking-widest">${match.venue}</span>
+                    </div>
+
+                    <!-- Live Badge -->
+                    ${match.isLive ?
+                        `<div class="absolute top-12 left-1/2 -translate-x-1/2 z-20">
+                        <span class="bg-red-600/90 text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest animate-pulse border border-red-500 shadow-[0_0_15px_rgba(220,38,38,0.5)]">Live Now</span>
+                    </div>` : ''}
+                    
+                    <div class="p-4 flex flex-col justify-center h-[calc(100%-48px)] relative">
+                        <!-- Background Glow -->
+                        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-green-500/10 blur-[50px] rounded-full"></div>
+
+                        <div class="flex justify-between items-center mb-6 relative z-10">
+                            <!-- Team 1 -->
+                            <div class="text-center w-[35%] flex flex-col items-center group">
+                                <div class="w-16 h-16 mb-3 relative transition-transform duration-300 group-hover:scale-110">
+                                    <div class="absolute inset-0 bg-white/5 rounded-full blur-xl"></div>
+                                    <img src="${match.team1.logo}" alt="${match.team1.name}" class="w-full h-full object-contain drop-shadow-2xl">
+                                </div>
+                                <h3 class="font-black text-sm text-slate-100 uppercase tracking-tighter leading-tight drop-shadow-md">${match.team1.name}</h3>
+                            </div>
+
+                            <!-- VS Logo -->
+                            <div class="text-center w-[30%] flex justify-center items-center">
+                                <img src="${VS_IMAGE_URL}" class="w-24 h-24 object-contain drop-shadow-[0_4px_6px_rgba(0,0,0,0.5)] filter brightness-110 contrast-125 animate-pulse-slow" alt="VS">
+                            </div>
+
+                            <!-- Team 2 -->
+                            <div class="text-center w-[35%] flex flex-col items-center group">
+                                <div class="w-16 h-16 mb-3 relative transition-transform duration-300 group-hover:scale-110">
+                                    <div class="absolute inset-0 bg-white/5 rounded-full blur-xl"></div>
+                                    <img src="${match.team2.logo}" alt="${match.team2.name}" class="w-full h-full object-contain drop-shadow-2xl">
+                                </div>
+                                <h3 class="font-black text-sm text-slate-100 uppercase tracking-tighter leading-tight drop-shadow-md">${match.team2.name}</h3>
+                            </div>
+                        </div>
+
+                        <!-- Odds Buttons -->
+                        <div class="grid grid-cols-2 gap-4 mt-auto">
+                            <a href="${REGISTRATION_LINK}" class="relative bg-gradient-to-b from-slate-700 to-slate-800 border border-slate-600 hover:border-green-500/50 rounded p-0 overflow-hidden group transition-all duration-300 shadow-lg">
+                                <div class="absolute inset-0 bg-green-500/10 opacity-0 group-hover:opacity-100 transition duration-300"></div>
+                                <div class="relative py-2 text-center">
+                                    <div class="text-[10px] text-slate-400 uppercase tracking-widest mb-0.5">Win 1</div>
+                                    <div class="text-xl font-bold text-white group-hover:text-green-400 font-mono transition-colors">${match.team1.odds}</div>
+                                </div>
+                            </a>
+                            <a href="${REGISTRATION_LINK}" class="relative bg-gradient-to-b from-slate-700 to-slate-800 border border-slate-600 hover:border-green-500/50 rounded p-0 overflow-hidden group transition-all duration-300 shadow-lg">
+                                <div class="absolute inset-0 bg-green-500/10 opacity-0 group-hover:opacity-100 transition duration-300"></div>
+                                <div class="relative py-2 text-center">
+                                    <div class="text-[10px] text-slate-400 uppercase tracking-widest mb-0.5">Win 2</div>
+                                    <div class="text-xl font-bold text-white group-hover:text-green-400 font-mono transition-colors">${match.team2.odds}</div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                `;
+                container.appendChild(slide);
+            });
+
+            // Initialize Swiper
+            new Swiper(".mySwiper", {
+                effect: "coverflow",
+                grabCursor: true,
+                centeredSlides: true,
+                slidesPerView: matches.length > 1 ? 1.2 : 1, /* Dynamic */
+                spaceBetween: 15,
+                coverflowEffect: {
+                    rotate: 0,
+                    stretch: 0,
+                    depth: 100,
+                    modifier: 1,
+                    slideShadows: false,
+                },
+                pagination: {
+                    el: ".swiper-pagination",
+                    clickable: true,
+                },
+            });
+        }
+
+        // Timer Logic
+        // Timer Logic
+        function startTimer(duration, display) {
+            let totalCentiseconds = duration * 100;
+
+            setInterval(function () {
+                let minutes = Math.floor(totalCentiseconds / 6000);
+                let seconds = Math.floor((totalCentiseconds % 6000) / 100);
+                let centiseconds = totalCentiseconds % 100;
+
+                minutes = minutes < 10 ? "0" + minutes : minutes;
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+                centiseconds = centiseconds < 10 ? "0" + centiseconds : centiseconds;
+
+                display.textContent = minutes + ":" + seconds + ":" + centiseconds;
+
+                if (--totalCentiseconds < 0) {
+                    totalCentiseconds = duration * 100;
+                }
+            }, 10);
+        }
+
+        window.onload = function () {
+            var tenMinutes = 60 * 10;
+            var display = document.querySelector('#timer');
+            startTimer(tenMinutes, display);
+            loadMatchesData();
+            loadHeroData();
+        };
+    </script>
+</body>
+
+</html>
