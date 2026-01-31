@@ -1,23 +1,5 @@
 [
     {
-        "id": "1769843126246",
-        "series": "New Zealand tour of India, 2026",
-        "date": "Today",
-        "time": "01:30 PM / 01:30 PM (GMT) / 07:00 PM (LOCAL)",
-        "venue": "",
-        "isLive": false,
-        "team1": {
-            "name": "India",
-            "logo": "https://static.cricbuzz.com/a/img/v1/152x152/i1/c776162/i.jpg",
-            "odds": ""
-        },
-        "team2": {
-            "name": "New Zealand",
-            "logo": "https://static.cricbuzz.com/a/img/v1/152x152/i1/c776333/i.jpg",
-            "odds": ""
-        }
-    },
-    {
         "id": "1769843964861",
         "series": "Australia tour of Pakistan, 2026",
         "date": "Today",
