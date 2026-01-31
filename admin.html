@@ -848,15 +848,48 @@
             };
 
             try {
-                await fetch('/api/hero', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(data)
-                });
-                alert('Hero section updated successfully!');
+                // Check valid environment
+                if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+                    // Local Environment: Use standard API
+                    const res = await fetch('/api/hero', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(data)
+                    });
+                    if (res.ok) alert('Hero section updated! Changes will appear on reload.');
+                } else {
+                    // Netlify Live Environment
+                    try {
+                        const directSaveRes = await fetch('/.netlify/functions/save-data', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ heroData: data }) // Sending heroData
+                        });
+
+                        const directSaveData = await directSaveRes.json();
+
+                        if (directSaveRes.ok && directSaveData.success) {
+                            alert("✅ HERO SECTON SAVED!\n\nNetlify is rebuilding the site. Changes will appear in ~1 minute.");
+                        } else {
+                            throw new Error(directSaveData.error || "Unknown Error");
+                        }
+                    } catch (directError) {
+                        console.warn("Direct save failed, falling back to clipboard:", directError);
+                        const jsonStr = JSON.stringify(data, null, 4);
+                        await navigator.clipboard.writeText(jsonStr);
+                        const confirmAction = confirm(
+                            "⚠️ Direct Save Failed (Token missing?).\n\n" +
+                            "I have copied the HERO DATA to your clipboard.\n\n" +
+                            "Click OK to open GitHub, then PASTE the data manually into hero_data.json."
+                        );
+                        if (confirmAction) {
+                            window.open("https://github.com/bigwin959/cclanding/edit/main/hero_data.json", "_blank");
+                        }
+                    }
+                }
             } catch (err) {
-                alert('Failed to update hero section');
                 console.error(err);
+                alert('Error updating hero section');
             }
         });
     </script>
