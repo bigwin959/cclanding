@@ -133,7 +133,6 @@ async function scrapeMatchData(category = 'live') {
                 if (!bigScript) continue;
 
                 const clean = bigScript.replace(/\\"/g, '"').replace(/\\\\/g, '\\');
-                // Regex updated to include potential venueInfo
                 const blocks = clean.match(/"matchId":\d+.*?"team2":\{.*?\}(?:,.*?"venueInfo":\{.*?\})?/g) || [];
 
                 blocks.forEach(block => {
@@ -168,19 +167,18 @@ async function scrapeMatchData(category = 'live') {
 
                     let dateStr = "";
                     let fullTimeStr = "";
+                    let timestamp = 0;
                     let isTargetDate = !requestedDate;
 
                     if (startM) {
-                        const timestamp = parseInt(startM[1]);
+                        timestamp = parseInt(startM[1]);
                         const dt = new Date(timestamp);
-
                         const now = new Date();
                         const tomorrow = new Date();
                         tomorrow.setDate(now.getDate() + 1);
 
                         const isToday = dt.toDateString() === now.toDateString();
                         const isTomorrow = dt.toDateString() === tomorrow.toDateString();
-
                         const dayNum = String(dt.getDate()).padStart(2, '0');
                         const monthNum = String(dt.getMonth() + 1).padStart(2, '0');
                         const yearNum = dt.getFullYear();
@@ -211,12 +209,15 @@ async function scrapeMatchData(category = 'live') {
                                 }
                             } catch (e) { }
                         }
-
                         fullTimeStr = `${userT} / ${gmtT} (GMT) / ${localT} (LOCAL)`;
 
                         if (requestedDate) {
                             const [ry, rm, rd] = requestedDate.split('-');
-                            isTargetDate = (dayNum === rd && monthNum === rm && String(yearNum) === ry);
+                            if (dayNum === rd && monthNum === rm && String(yearNum) === ry) {
+                                isTargetDate = true;
+                            } else {
+                                isTargetDate = false;
+                            }
                         }
                     }
 
@@ -237,7 +238,7 @@ async function scrapeMatchData(category = 'live') {
                         };
                         const t1 = extractT(t1M[1]);
                         const t2 = extractT(t2M[1]);
-                        allRawMatches.push({ id, series, dateStr, fullTimeStr, t1, t2, status, state, url });
+                        allRawMatches.push({ id, series, dateStr, fullTimeStr, t1, t2, status, state, url, timestamp });
                     }
                 });
             } catch (err) {
@@ -250,6 +251,7 @@ async function scrapeMatchData(category = 'live') {
             const live = liveInfoMap.get(m.id);
             const status = live ? live.status : m.status;
             const state = live ? live.state : m.state;
+            const isLive = state === "In Progress" || status.includes("Need") || status.includes("trails") || status.includes("leads");
 
             const entry = {
                 id: 'cb_' + m.id,
@@ -260,16 +262,46 @@ async function scrapeMatchData(category = 'live') {
                 team1: { name: m.t1.name, logo: m.t1.logo, odds: "1.90" },
                 team2: { name: m.t2.name, logo: m.t2.logo, odds: "1.90" },
                 status: status,
-                isLive: state === "In Progress" || status.includes("Need") || status.includes("trails") || status.includes("leads")
+                isLive: isLive,
+                timestamp: m.timestamp,
+                state: state
             };
 
+            // Deduplication
             const existing = mergedMatches.get(m.id);
             if (!existing || (!existing.date.includes('/') && m.dateStr.includes('/')) || (existing.time.length < m.fullTimeStr.length)) {
                 mergedMatches.set(m.id, entry);
             }
         });
 
-        return Array.from(mergedMatches.values());
+        // Filter Logic
+        let finalMatches = Array.from(mergedMatches.values());
+        const now = Date.now();
+        const yesterdayDate = new Date();
+        yesterdayDate.setDate(yesterdayDate.getDate() - 1);
+        const yesterdayStr = yesterdayDate.toDateString();
+
+        if (category === 'live') {
+            finalMatches = finalMatches.filter(m => m.isLive);
+        } else if (category === 'upcoming') {
+            finalMatches = finalMatches.filter(m => {
+                const isFinished = m.state === "Complete" || m.status.includes("won");
+                const inFuture = m.timestamp > now;
+                return !m.isLive && !isFinished && (inFuture || m.status === 'Scheduled');
+            });
+        } else if (category === 'recent') {
+            finalMatches = finalMatches.filter(m => {
+                if (!m.timestamp) return false;
+                const d = new Date(m.timestamp);
+                return d.toDateString() === yesterdayStr;
+            });
+        }
+        // For schedule, strict filtering was applied during iteration via `isTargetDate` check (with `return`), 
+        // but we double check if any leaked. 
+        // Actually, in the loop: `if (!isTargetDate && category === 'schedule') return;` handles filtering BEFORE pushing to `allRawMatches`.
+        // So `finalMatches` should already be filtered.
+
+        return finalMatches;
     } catch (error) {
         console.error("Error in enhanced fetching:", error.message);
         return [];
@@ -340,7 +372,7 @@ app.post('/api/matches', (req, res) => {
 
     if (match.id) {
         // Update existing
-        const idx = matches.findIndex(m => m.id === match.id);
+        const idx = matches.findIndex(m => String(m.id) === String(match.id));
         if (idx !== -1) {
             matches[idx] = match;
         } else {
@@ -360,7 +392,7 @@ app.post('/api/matches', (req, res) => {
 app.delete('/api/matches/:id', (req, res) => {
     const { id } = req.params;
     let matches = readData();
-    const filtered = matches.filter(m => m.id !== id);
+    const filtered = matches.filter(m => String(m.id) !== String(id));
     writeData(filtered);
     res.json({ success: true });
 });

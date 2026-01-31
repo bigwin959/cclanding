@@ -77,10 +77,11 @@ exports.handler = async function (event, context) {
 
                     let dateStr = "";
                     let fullTimeStr = "";
+                    let timestamp = 0;
                     let isTargetDate = !requestedDate;
 
                     if (startM) {
-                        const timestamp = parseInt(startM[1]);
+                        timestamp = parseInt(startM[1]);
                         const dt = new Date(timestamp);
                         const now = new Date();
                         const tomorrow = new Date();
@@ -122,7 +123,11 @@ exports.handler = async function (event, context) {
 
                         if (requestedDate) {
                             const [ry, rm, rd] = requestedDate.split('-');
-                            isTargetDate = (dayNum === rd && monthNum === rm && String(yearNum) === ry);
+                            if (dayNum === rd && monthNum === rm && String(yearNum) === ry) {
+                                isTargetDate = true;
+                            } else {
+                                isTargetDate = false;
+                            }
                         }
                     }
 
@@ -143,7 +148,7 @@ exports.handler = async function (event, context) {
                         };
                         const t1 = extractT(t1M[1]);
                         const t2 = extractT(t2M[1]);
-                        allRawMatches.push({ id, series, dateStr, fullTimeStr, t1, t2, status, state, url });
+                        allRawMatches.push({ id, series, dateStr, fullTimeStr, t1, t2, status, state, url, timestamp });
                     }
                 });
             } catch (err) {
@@ -156,6 +161,7 @@ exports.handler = async function (event, context) {
             const live = liveInfoMap.get(m.id);
             const status = live ? live.status : m.status;
             const state = live ? live.state : m.state;
+            const isLive = state === "In Progress" || status.includes("Need") || status.includes("trails") || status.includes("leads");
 
             const entry = {
                 id: 'cb_' + m.id,
@@ -166,7 +172,8 @@ exports.handler = async function (event, context) {
                 team1: { name: m.t1.name, logo: m.t1.logo, odds: "1.90" },
                 team2: { name: m.t2.name, logo: m.t2.logo, odds: "1.90" },
                 status: status,
-                isLive: state === "In Progress" || status.includes("Need") || status.includes("trails") || status.includes("leads")
+                isLive: isLive,
+                timestamp: m.timestamp
             };
 
             const existing = mergedMatches.get(m.id);
@@ -175,9 +182,33 @@ exports.handler = async function (event, context) {
             }
         });
 
+        // Filter Logic
+        let finalMatches = Array.from(mergedMatches.values());
+        const now = Date.now();
+        const yesterdayDate = new Date();
+        yesterdayDate.setDate(yesterdayDate.getDate() - 1);
+        const yesterdayStr = yesterdayDate.toDateString();
+
+        if (category === 'live') {
+            finalMatches = finalMatches.filter(m => m.isLive);
+        } else if (category === 'upcoming') {
+            finalMatches = finalMatches.filter(m => {
+                const isFinished = m.state === "Complete" || m.status.includes("won");
+                const inFuture = m.timestamp > now;
+                return !m.isLive && !isFinished && (inFuture || m.status === 'Scheduled');
+            });
+        } else if (category === 'recent') {
+            finalMatches = finalMatches.filter(m => {
+                if (!m.timestamp) return false;
+                const d = new Date(m.timestamp);
+                return d.toDateString() === yesterdayStr;
+            });
+        }
+        // Schedule is pre-filtered
+
         return {
             statusCode: 200,
-            body: JSON.stringify({ success: true, matches: Array.from(mergedMatches.values()) })
+            body: JSON.stringify({ success: true, matches: finalMatches })
         };
     } catch (error) {
         return {
