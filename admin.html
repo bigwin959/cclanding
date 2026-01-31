@@ -543,11 +543,61 @@
             }
         });
 
-        // Delete
+        // Delete Match
         async function deleteMatch(id) {
             if (!confirm('Are you sure you want to delete this match?')) return;
-            await fetch(`${API_URL}/${id}`, { method: 'DELETE' });
-            loadMatches();
+
+            try {
+                // Check valid environment
+                if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+                    // Local Environment: Use standard API
+                    await fetch(`${API_URL}/${id}`, { method: 'DELETE' });
+                    loadMatches();
+                } else {
+                    // Netlify Live Environment: Use Save-Data logic with filtered list
+
+                    // 1. Simulate Delete in Memory
+                    let updatedMatches = globalMatches.filter(m => String(m.id) !== String(id));
+
+                    // 2. Try Direct Save via Netlify Function
+                    try {
+                        const directSaveRes = await fetch('/.netlify/functions/save-data', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ matches: updatedMatches }) // Sending new list
+                        });
+
+                        const directSaveData = await directSaveRes.json();
+
+                        if (directSaveRes.ok && directSaveData.success) {
+                            alert("✅ MATCH DELETED!\n\nNetlify is rebuilding the site. Changes will appear in ~1 minute.");
+                            globalMatches = updatedMatches;
+                            loadMatches(); // Update UI
+                        } else {
+                            throw new Error(directSaveData.error || "Unknown Error");
+                        }
+
+                    } catch (directError) {
+                        console.warn("Direct delete failed, falling back to clipboard:", directError);
+
+                        const jsonStr = JSON.stringify(updatedMatches, null, 4);
+                        await navigator.clipboard.writeText(jsonStr);
+
+                        const confirmAction = confirm(
+                            "⚠️ Direct Delete Failed (Token missing?).\n\n" +
+                            "I have copied the UPDATED JSON (without this match) to your clipboard.\n\n" +
+                            "Click OK to open GitHub, then PASTE the data manually."
+                        );
+
+                        if (confirmAction) {
+                            window.open("https://github.com/bigwin959/cclanding/edit/main/data.json", "_blank");
+                        }
+                    }
+                }
+            } catch (e) {
+                console.error(e);
+                alert('An error occurred while trying to delete.');
+            }
         }
 
         // Edit Helper
