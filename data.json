@@ -16,5 +16,23 @@
             "logo": "https://static.cricbuzz.com/a/img/v1/152x152/i1/c776237/i.jpg",
             "odds": ""
         }
+    },
+    {
+        "id": "1769838508115",
+        "series": "Super Smash 2025-26",
+        "date": "Today",
+        "time": "04:55 AM / 04:55 AM (GMT) / 05:55 PM (LOCAL)",
+        "venue": "",
+        "isLive": true,
+        "team1": {
+            "name": "Canterbury",
+            "logo": "https://static.cricbuzz.com/a/img/v1/152x152/i1/c172362/i.jpg",
+            "odds": ""
+        },
+        "team2": {
+            "name": "Northern Districts",
+            "logo": "https://static.cricbuzz.com/a/img/v1/152x152/i1/c172343/i.jpg",
+            "odds": ""
+        }
     }
 ]
