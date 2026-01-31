@@ -1,19 +1,19 @@
 [
     {
-        "id": "1769843126246",
-        "series": "New Zealand tour of India, 2026",
-        "date": "Today",
+        "id": "1769843785592",
+        "series": "England tour of Sri Lanka 2026",
+        "date": "30/01/2026",
         "time": "01:30 PM / 01:30 PM (GMT) / 07:00 PM (LOCAL)",
         "venue": "",
         "isLive": false,
         "team1": {
-            "name": "India",
-            "logo": "https://static.cricbuzz.com/a/img/v1/152x152/i1/c776162/i.jpg",
+            "name": "Sri Lanka",
+            "logo": "https://static.cricbuzz.com/a/img/v1/152x152/i1/c776254/i.jpg",
             "odds": ""
         },
         "team2": {
-            "name": "New Zealand",
-            "logo": "https://static.cricbuzz.com/a/img/v1/152x152/i1/c776333/i.jpg",
+            "name": "England",
+            "logo": "https://static.cricbuzz.com/a/img/v1/152x152/i1/c776237/i.jpg",
             "odds": ""
         }
     }
