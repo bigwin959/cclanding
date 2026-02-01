@@ -3,18 +3,18 @@
         "id": "1769843964861",
         "series": "Australia tour of Pakistan, 2026",
         "date": "Today",
-        "time": "11:00 AM / 11:00 AM (GMT) / 04:00 PM (LOCAL)",
-        "venue": "",
+        "time": "  4:00 PM LOCAL, 11:00 AM GMT",
+        "venue": " Gaddafi Stadium, Lahore",
         "isLive": false,
         "team1": {
             "name": "Pakistan",
             "logo": "https://static.cricbuzz.com/a/img/v1/152x152/i1/c776308/i.jpg",
-            "odds": ""
+            "odds": "2.38"
         },
         "team2": {
             "name": "Australia",
             "logo": "https://static.cricbuzz.com/a/img/v1/152x152/i1/c776202/i.jpg",
-            "odds": ""
+            "odds": "1.71"
         }
     }
 ]
