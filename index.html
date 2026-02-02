@@ -8,9 +8,9 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Bebas+Neue&display=swap"
     rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-  <script src="https://unpkg.com/framer-motion@10.16.4/dist/framer-motion.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/framer-motion@10.16.4/dist/framer-motion.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
 
   <style>
@@ -195,14 +195,10 @@
     class="w-full fixed top-0 z-[100] transition-all duration-300 px-4 py-3 bg-slate-900/40 backdrop-blur-xl border-b border-white/5">
     <div class="max-w-7xl mx-auto flex justify-between items-center">
       <div class="flex items-center gap-3">
-        <div
-          class="w-10 h-10 bg-gradient-to-br from-emerald-400 to-emerald-600 rounded-xl flex items-center justify-center shadow-lg shadow-emerald-500/20">
-          <i id="nav-icon" class="fa-solid fa-trophy text-white text-xl"></i>
-        </div>
-        <div class="flex flex-col">
-          <span id="nav-title" class="heading-font text-2xl tracking-tighter leading-none">BPL<span
-              class="text-emerald-500">2026</span></span>
-          <span class="text-[10px] uppercase tracking-[0.2em] text-emerald-500 font-bold">Official Partner</span>
+        <img src="https://chimerical-crisp-ce09f8.netlify.app/logo.png" alt="BPL Logo"
+          class="h-12 w-auto object-contain">
+        <div class="flex flex-col justify-center">
+          <span class="text-[10px] uppercase tracking-[0.2em] text-emerald-500 font-bold">Premium Betting Partner</span>
         </div>
       </div>
       <div class="flex items-center gap-4">
@@ -231,7 +227,7 @@
           LEAGUE</span>
       </h1>
       <p class="text-slate-400 text-sm tracking-widest uppercase font-light" style="margin-bottom: 20px;">
-        official Partner
+        Premium Betting Partner
       </p>
       <div class="text-center space-y-2 mb-6">
         <h3 id="bonus-title" class="heading-font text-4xl text-white">
@@ -299,77 +295,16 @@
       </div>
     </section>
 
-    <!-- Matches Header -->
-    <div class="flex justify-between items-end px-2">
-      <div>
-        <h2 class="heading-font text-3xl text-white">Live Matches</h2>
-        <div class="w-12 h-1 bg-emerald-500 rounded-full"></div>
-      </div>
-      <div class="flex items-center gap-2 text-emerald-400 text-xs font-bold swipe-hint">
-        <span>Swipe for more</span>
-        <i class="fa-solid fa-arrow-right-long"></i>
-      </div>
-    </div>
+    <!-- Matches Header & Swiper Removed -->
 
-    <!-- Swiper Container -->
-    <div class="swiper mySwiper w-full !overflow-visible">
-      <div class="swiper-wrapper" id="matches-container">
-        <!-- Data-driven slides -->
-      </div>
-      <div class="swiper-pagination !-bottom-10"></div>
-    </div>
-
-    <!-- Winners Ticker -->
-    <section class="marquee-container w-full py-4 overflow-hidden bg-emerald-500/5 border-y border-white/5 relative">
-      <div class="flex gap-12 animate-[marquee_20s_linear_infinite] whitespace-nowrap" id="winner-ticker">
-        <!-- Group 1 -->
-        <span class="text-xs font-bold text-emerald-400 flex items-center"><i
-            class="fa-solid fa-circle-check mr-2 opacity-50"></i>Rahim won 5,000 BDT</span>
-        <span class="text-xs font-bold text-emerald-400 flex items-center"><i
-            class="fa-solid fa-circle-check mr-2 opacity-50"></i>Karim won 12,000 BDT</span>
-        <span class="text-xs font-bold text-emerald-400 flex items-center"><i
-            class="fa-solid fa-circle-check mr-2 opacity-50"></i>Sakib won 2,500 BDT</span>
-        <span class="text-xs font-bold text-emerald-400 flex items-center"><i
-            class="fa-solid fa-circle-check mr-2 opacity-50"></i>Tanvir won 8,000 BDT</span>
-        <!-- Group 2 (Duplicate for seamless loop) -->
-        <span class="text-xs font-bold text-emerald-400 flex items-center"><i
-            class="fa-solid fa-circle-check mr-2 opacity-50"></i>Rahim won 5,000 BDT</span>
-        <span class="text-xs font-bold text-emerald-400 flex items-center"><i
-            class="fa-solid fa-circle-check mr-2 opacity-50"></i>Karim won 12,000 BDT</span>
-        <span class="text-xs font-bold text-emerald-400 flex items-center"><i
-            class="fa-solid fa-circle-check mr-2 opacity-50"></i>Sakib won 2,500 BDT</span>
-        <span class="text-xs font-bold text-emerald-400 flex items-center"><i
-            class="fa-solid fa-circle-check mr-2 opacity-50"></i>Tanvir won 8,000 BDT</span>
-      </div>
-    </section>
+    <!-- Winners Ticker Removed -->
 
     <!-- Social & Support -->
-    <div id="social-section" class="grid grid-cols-3 gap-4">
-      <!-- Dynamic Social -->
-    </div>
-
-    <a href="https://t.me/bigwin959"
-      class="glass-panel p-4 flex items-center gap-4 bg-sky-500/10 border-sky-500/20 group hover:bg-sky-500/20 transition-all">
-      <div
-        class="w-12 h-12 bg-sky-500 rounded-2xl flex items-center justify-center text-2xl text-white shadow-lg shadow-sky-500/30">
-        <i class="fa-brands fa-telegram"></i>
-      </div>
-      <div>
-        <div class="font-bold text-sky-400">Official Telegram Channel</div>
-        <div class="text-xs text-slate-400">
-          Join for Daily Betting Tips & Prediction
-        </div>
-      </div>
-      <i class="fa-solid fa-chevron-right ml-auto text-sky-500 group-hover:translate-x-1 transition"></i>
-    </a>
+    <!-- Social & Support Removed -->
   </main>
 
   <footer class="w-full bg-slate-950/80 backdrop-blur-md py-12 px-6 border-t border-white/5">
     <div class="max-w-lg mx-auto text-center space-y-6">
-      <p class="text-[10px] text-slate-500 leading-relaxed font-light">
-        © 2026 BPL Official Entertainment Partner. Gambling can be addictive.
-        Please play responsibly. All rights reserved. 18+ Only.
-      </p>
       <div class="flex justify-center gap-6 text-[10px] text-slate-400 uppercase tracking-widest font-bold">
         <a href="#" class="hover:text-emerald-500 transition">Privacy</a>
         <a href="#" class="hover:text-emerald-500 transition">Terms</a>
@@ -385,92 +320,7 @@
     let REGISTRATION_LINK =
       "https://www.bigwin959.com/?tid=56086&affiliateCode=heylinkvideo&fbPixelId=1093698699511405";
 
-    // Load Matches
-    async function loadMatches() {
-      try {
-        const res = await fetch("data.json");
-        const matches = await res.json();
-        renderMatches(matches);
-      } catch (e) {
-        console.error(e);
-      }
-    }
-
-    function renderMatches(matches) {
-      const container = document.getElementById("matches-container");
-      container.innerHTML = "";
-
-      matches.forEach((m) => {
-        const card = `
-                    <div class="swiper-slide h-auto">
-                        <div class="glass-panel p-6 border-white/10 h-full relative group">
-                            <div class="absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-transparent pointer-events-none"></div>
-                            
-                            <div class="flex justify-between items-center mb-6">
-                                <div class="flex items-center gap-2">
-                                    <div class="w-1.5 h-1.5 bg-emerald-500 rounded-full shadow-[0_0_8px_rgba(16,185,129,0.8)]"></div>
-                                    <div class="px-2 py-0.5 bg-white/5 rounded-md border border-white/5 text-[9px] font-bold tracking-[0.1em] text-slate-400 uppercase">
-                                        ${m.venue}
-                                    </div>
-                                </div>
-                                ${m.isLive ? '<span class="flex items-center gap-1.5 px-3 py-1 bg-red-500/10 border border-red-500/30 rounded-full text-[9px] font-black text-red-500 uppercase animate-pulse shadow-[0_0_15px_rgba(239,68,68,0.2)]">● Live</span>' : ""}
-                            </div>
-
-                            <div class="flex justify-between items-center mb-8 relative">
-                                <div class="text-center flex-1">
-                                    <div class="w-20 h-20 mx-auto mb-3 bg-white/5 rounded-full p-3 border border-white/5 shadow-2xl transition-transform group-hover:scale-110 duration-500">
-                                        <img src="${m.team1.logo}" class="w-full h-full object-contain">
-                                    </div>
-                                    <h3 class="heading-font text-xl text-white truncate px-2">${m.team1.name}</h3>
-                                </div>
-                                
-                                <div class="absolute left-1/2 -translate-x-1/2 top-4">
-                                    <img src="${VS_IMAGE_URL}" class="w-16 opacity-50 select-none grayscale contrast-200">
-                                </div>
-
-                                <div class="text-center flex-1">
-                                    <div class="w-20 h-20 mx-auto mb-3 bg-white/5 rounded-full p-3 border border-white/5 shadow-2xl transition-transform group-hover:scale-110 duration-500">
-                                        <img src="${m.team2.logo}" class="w-full h-full object-contain">
-                                    </div>
-                                    <h3 class="heading-font text-xl text-white truncate px-2">${m.team2.name}</h3>
-                                </div>
-                            </div>
-
-                            <div class="grid grid-cols-2 gap-4 mt-auto">
-                                <a href="${REGISTRATION_LINK}" class="glass-card p-4 rounded-2xl text-center group/btn relative overflow-hidden">
-                                    <div class="text-[10px] text-slate-500 uppercase mb-1">Win ${m.team1.name}</div>
-                                    <div class="text-2xl font-black text-emerald-400 font-mono">${m.team1.odds}</div>
-                                </a>
-                                <a href="${REGISTRATION_LINK}" class="glass-card p-4 rounded-2xl text-center group/btn relative overflow-hidden">
-                                    <div class="text-[10px] text-slate-500 uppercase mb-1">Win ${m.team2.name}</div>
-                                    <div class="text-2xl font-black text-emerald-400 font-mono">${m.team2.odds}</div>
-                                </a>
-                            </div>
-
-                            <div class="mt-4 pt-4 border-t border-white/5 text-center">
-                                <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">${m.date} • ${m.time}</div>
-                            </div>
-                        </div>
-                    </div>
-                `;
-        container.insertAdjacentHTML("beforeend", card);
-      });
-
-      new Swiper(".mySwiper", {
-        effect: "coverflow",
-        grabCursor: true,
-        centeredSlides: true,
-        slidesPerView: 1.2,
-        coverflowEffect: {
-          rotate: 0,
-          stretch: -40,
-          depth: 150,
-          modifier: 1,
-          slideShadows: false,
-        },
-        pagination: { el: ".swiper-pagination", clickable: true },
-      });
-    }
+    // Load Matches logic removed
 
     // Hero and Theme Data
     async function loadTheme() {
@@ -513,20 +363,7 @@
         if (data.promoCode)
           document.getElementById("promo-code").textContent = data.promoCode;
 
-        // Social Links
-        if (data.socialContacts) {
-          const sec = document.getElementById("social-section");
-          sec.innerHTML = data.socialContacts
-            .map(
-              (s) => `
-                        <a href="${s.link}" class="glass-panel p-4 flex flex-col items-center justify-center transition-all hover:border-emerald-500/40">
-                            <i class="${s.icon} text-2xl mb-2" style="color: ${s.color}"></i>
-                            <span class="text-[10px] text-slate-500 font-bold uppercase">${s.name}</span>
-                        </a>
-                    `,
-            )
-            .join("");
-        }
+        // Social Links Removed
       } catch (e) {
         console.error(e);
       }
@@ -590,7 +427,7 @@
     }
 
     window.onload = () => {
-      loadMatches();
+      // loadMatches(); // Removed
       loadTheme();
       startTimer(600);
       initParticles();
