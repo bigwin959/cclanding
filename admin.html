@@ -4,12 +4,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
     <title>BPL Admin Panel</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
 </head>
 
 <body class="bg-gray-100 min-h-screen p-8">
+    <script>
+        // Simple Client-Side Gate to stop Bots/Casual Users
+        (function () {
+            if (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
+                const key = localStorage.getItem('admin_access');
+                if (key !== 'bpl_super_admin') {
+                    const phrase = prompt("Enter Admin Passphrase:");
+                    if (phrase === 'bpl2026') {
+                        localStorage.setItem('admin_access', 'bpl_super_admin');
+                    } else {
+                        document.body.innerHTML = '<div style="display:flex;justify-content:center;align-items:center;height:100vh;background:#000;color:red;"><h1>403 Forbidden - Access Denied</h1></div>';
+                        setTimeout(() => window.location.href = 'index.html', 1000);
+                        throw new Error("Access Denied");
+                    }
+                }
+            }
+        })();
+    </script>
 
     <div class="max-w-4xl mx-auto">
         <header class="flex justify-between items-center mb-8">
